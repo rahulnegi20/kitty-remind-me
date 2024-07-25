@@ -1,23 +1,25 @@
 const defaultInterval = 60; // in minutes
-
 let reminderIntervalId;
+let soundEnabled = false;
 
-// Initialize settings and start the reminder when the extension is installed
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ interval: defaultInterval, reminderActive: false });
+  chrome.storage.sync.set({ interval: defaultInterval, reminderActive: false, soundEnabled: false });
 });
 
-// Listen for changes in storage and update the reminder interval accordingly
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === 'sync' && changes.interval) {
-    startReminder(changes.interval.newValue);
-  }
-  if (area === 'sync' && changes.reminderActive && !changes.reminderActive.newValue) {
-    stopReminder();
+  if (area === 'sync') {
+    if (changes.interval) {
+      startReminder(changes.interval.newValue);
+    }
+    if (changes.reminderActive && !changes.reminderActive.newValue) {
+      stopReminder();
+    }
+    if (changes.soundEnabled) {
+      soundEnabled = changes.soundEnabled.newValue;
+    }
   }
 });
 
-// Start or restart the reminder based on the interval
 function startReminder(interval) {
   if (reminderIntervalId) {
     clearInterval(reminderIntervalId);
@@ -31,10 +33,30 @@ function startReminder(interval) {
       message: 'Stay hydrated! 🐱',
       priority: 0
     });
+
+    if (soundEnabled) {
+      chrome.tabs.query({}, (tabs) => {
+        for (let i = 0; i < tabs.length; i++) {
+          chrome.scripting.executeScript({
+            target: { tabId: tabs[i].id },
+            files: ['content.js']
+          }, () => {
+            const audioFileUrl = chrome.runtime.getURL('meow1.mp3');
+            console.log("Sending message to tab id:", tabs[i].id);
+            chrome.tabs.sendMessage(tabs[i].id, { action: 'playSound', fileName: audioFileUrl }, (response) => {
+              if (chrome.runtime.lastError) {
+                console.error("Error sending message:", chrome.runtime.lastError);
+              } else {
+                console.log("Message sent, response:", response);
+              }
+            });
+          });
+        }
+      });
+    }
   }, interval * 60 * 1000);
 }
 
-// Stop the reminder
 function stopReminder() {
   if (reminderIntervalId) {
     clearInterval(reminderIntervalId);
@@ -42,20 +64,20 @@ function stopReminder() {
   }
 }
 
-// Handle messages from the popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'startReminder') {
     startReminder(message.interval);
-    sendResponse({status: 'started'});
+    soundEnabled = message.soundEnabled;
+    sendResponse({ status: 'started' });
   } else if (message.action === 'stopReminder') {
     stopReminder();
-    sendResponse({status: 'stopped'});
+    sendResponse({ status: 'stopped' });
   }
-  return true; // Indicate that you want to send a response asynchronously
+  return true;
 });
 
-// Ensure the reminder is started with the default or previously saved interval on extension start
-chrome.storage.sync.get(['interval', 'reminderActive'], (result) => {
+chrome.storage.sync.get(['interval', 'reminderActive', 'soundEnabled'], (result) => {
+  soundEnabled = result.soundEnabled || false;
   if (result.reminderActive) {
     startReminder(result.interval || defaultInterval);
   }

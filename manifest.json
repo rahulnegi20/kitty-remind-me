@@ -3,16 +3,28 @@
     "name": "Water Kitty",
     "version": "1.0",
     "description": "Reminds you to drink water with a cute kitty every hour.",
-    "permissions": ["notifications", "storage"],
+    "permissions": ["notifications", "storage", "activeTab", "tabGroups", "tabs", "scripting"],
     "background": {
       "service_worker": "background.js"
     },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "web_accessible_resources": [{
+      "resources": ["meow1.mp3"],
+      "matches": ["<all_urls>"],
+     "extension_ids": []
+    }], 
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
         "48": "icons/icon48.png"
       }
     },
+    "host_permissions": ["*://*/*"],
     "icons": {
       "48": "icons/icon48.png"
     }
