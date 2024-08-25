@@ -1,3 +1,4 @@
+var background = chrome.extension.getBackgroundPage (); 
 document.addEventListener('DOMContentLoaded', () => {
   const intervalInput = document.getElementById('interval');
   const saveButton = document.getElementById('save');
