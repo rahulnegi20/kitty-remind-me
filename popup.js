@@ -1,4 +1,3 @@
-var background = chrome.extension.getBackgroundPage (); 
 document.addEventListener('DOMContentLoaded', () => {
   const intervalInput = document.getElementById('interval');
   const saveButton = document.getElementById('save');
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.set({ reminderActive: false }, () => {
       chrome.runtime.sendMessage({ action: 'stopReminder' }, (response) => {
         if (chrome.runtime.lastError) {
-          console.error("Error sending message:", chrome.runtime.lastError);
+          console.log("Error sending message:", chrome.runtime.lastError);
         } else {
           stopButton.style.display = 'none';
         }

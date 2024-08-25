@@ -4,6 +4,12 @@ console.log("LOADED2..............")
 // content.js
 console.log("Content script loaded.");
 
+chrome.runtime.sendMessage({action: "checkAlive"}, function(response) {
+  if (response && response.status === 'alive') {
+    console.log("Background script is alive");
+  }
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log("Message received in content script:", message);
   if (message.action === 'playSound') {
