@@ -30,12 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Stop the reminders
   stopButton.addEventListener('click', () => {
-    chrome.storage.sync.set({ reminderActive: false }, () => {
+    chrome.storage.sync.set({ reminderActive: false, soundEnabled:false, interval:30 }, () => {
       chrome.runtime.sendMessage({ action: 'stopReminder' }, (response) => {
         if (chrome.runtime.lastError) {
           console.log("Error sending message:", chrome.runtime.lastError);
         } else {
           stopButton.style.display = 'none';
+          document.getElementById('interval').value = '';
+          document.getElementById('sound').checked = false;
         }
       });
     });

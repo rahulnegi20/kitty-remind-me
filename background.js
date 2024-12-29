@@ -71,7 +71,7 @@ function addListeners() {
           console.log('Sound enabled:', soundEnabled);
         }
       } catch (error) {
-        console.error('Error in storage change listener:', error);
+        console.log('Error in storage change listener:', error);
       }
     }
   });
@@ -94,7 +94,7 @@ function addListeners() {
         sendResponse({success: false, error: 'Unknown action'});
       }
     } catch (error) {
-      console.error('Error processing message:', error);
+      console.log('Error processing message:', error);
       sendResponse({success: false, error: error.message});
     }
     return true; // Keeps the message channel open for asynchronous responses
