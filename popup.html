@@ -3,24 +3,33 @@
 <head>
   <title>Water Reminder</title>
   <link rel="stylesheet" href="popup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <div class="container">
-    <h1>I will remind you in</h1>
-    <label for="interval">Interval (minutes): </label>
-    <input type="number" id="interval" min="1">
-    <button id="save">Save</button>
-    <button id="stop" style="display:none;">Stop</button>
-    <div class="radio">
-      <!-- <input type="checkbox" id="sound">
-      <label for="sound">notification sound</label> -->
-      <span class="label-tag">Sound</span>
+    <h1>Water Kitty</h1>
+    
+    <div class="form-group">
+      <span class="label-tag">Interval (minutes):</span>
+      <input type="number" id="interval" min="1">
+    </div>
+    
+    <div class="form-group">
+      <span class="label-tag">Sound:</span>
       <label class="switch" for="sound">
-        <input type="checkbox" id="sound" checked>
+        <input type="checkbox" id="sound" >
         <span class="slider round"></span>
       </label>
-  </div>
+    </div>
 
+    <div class="button-group">
+      <button id="save">Save</button>
+      <button class="reset" id="stop" style="display:none;">Reset</button>
+    </div>
+    
   </div>
   <script src="popup.js"></script>
 </body>

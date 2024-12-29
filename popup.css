@@ -22,23 +22,22 @@ body {
   background-repeat: no-repeat;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 400px;
-  /* Adjust the height to make sure the image fits well */
   width: 300px;
-  /* Adjust the width to match the design */
 }
 
 h1 {
   font-size: 25px;
   margin: 375px 0px 20px;
-  color: black;
-  /* Adjust margin to make room for the background image */
+  color: white;
+  font-family: "Lilita One", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 label {
   font-size: 14px;
   display: block;
   margin-bottom: 5px;
-  margin-top: 30px;
 }
 
 input[type="number"] {
@@ -60,23 +59,50 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+.button-group {
+  padding: 5px 20px;
+
+}
 
 button:hover {
   background-color: #0056b3;
 }
-
-.radio {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 10px;
-
+.reset {
+  background-color: grey;
 }
 
-.radio label {
-  margin-top: 0px;
-  margin-left: 5px;
+.reset:hover{
+  background-color: red;
 }
+
+.label-tag {
+  margin-right: 10px;
+  padding-top: 0; 
+  color: white;
+  font-size: 18px;
+}
+
+.form-group {
+  align-items: center; /* Ensures vertical alignment */
+  padding-top: 5px;
+}
+
+.form-group label {
+  font-size: 22px;
+  text-align: left;
+}
+
+.form-group input {
+  width: 80px; /* Fixed width for input */
+  padding: 5px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  height: 34px; /* Same height as the toggle for uniformity */
+  box-sizing: border-box; /* Ensures padding doesn't affect height */
+}
+
 
 /* Rounded sliders */
 .slider.round {
@@ -125,7 +151,7 @@ button:hover {
 }
 
 input:checked+.slider {
-  background-color: #0f8fc2;
+  background-color:#007bff;
 }
 
 input:focus+.slider {
