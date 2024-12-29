@@ -12,9 +12,15 @@
     <button id="save">Save</button>
     <button id="stop" style="display:none;">Stop</button>
     <div class="radio">
-      <input type="checkbox" id="sound">
-      <label for="sound">notification sound</label>
-    </div>
+      <!-- <input type="checkbox" id="sound">
+      <label for="sound">notification sound</label> -->
+      <span class="label-tag">Sound</span>
+      <label class="switch" for="sound">
+        <input type="checkbox" id="sound" checked>
+        <span class="slider round"></span>
+      </label>
+  </div>
+
   </div>
   <script src="popup.js"></script>
 </body>

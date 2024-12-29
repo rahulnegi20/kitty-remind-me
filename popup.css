@@ -1,12 +1,13 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: rgb(171, 184, 201);
+  background-color: rgb(79, 79, 80);
   margin: 0;
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 300px;
+  color: white;
 }
 
 .container {
@@ -20,13 +21,17 @@ body {
   background-position: center top;
   background-repeat: no-repeat;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 400px; /* Adjust the height to make sure the image fits well */
-  width: 300px; /* Adjust the width to match the design */
+  height: 400px;
+  /* Adjust the height to make sure the image fits well */
+  width: 300px;
+  /* Adjust the width to match the design */
 }
 
 h1 {
   font-size: 25px;
-  margin: 375px 0px 20px; /* Adjust margin to make room for the background image */
+  margin: 375px 0px 20px;
+  color: black;
+  /* Adjust margin to make room for the background image */
 }
 
 label {
@@ -45,6 +50,7 @@ input[type="number"] {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
+
 button {
   padding: 10px 20px;
   font-size: 14px;
@@ -66,7 +72,68 @@ button:hover {
   padding-bottom: 10px;
 
 }
+
 .radio label {
   margin-top: 0px;
   margin-left: 5px;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #0f8fc2;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #14e07a;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
