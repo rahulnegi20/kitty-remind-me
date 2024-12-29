@@ -1,4 +1,4 @@
-const defaultInterval = 1; // in minutes
+const defaultInterval = 30; // in minutes
 let reminderIntervalId = null;
 let soundEnabled = false;
 
