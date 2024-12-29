@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'playSound') {
     var audio = new Audio(message.fileName);
     console.log("Audio:", audio);
-    audio.play().catch(error => console.error("Error playing sound:", error));
+    audio.play().catch(error => console.log("Error playing sound:", error));
     sendResponse(true);
     // document.body.addEventListener('click', () => {
     //   console.log("Playing sound...");
