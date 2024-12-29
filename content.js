@@ -1,7 +1,3 @@
-// content.js
-console.log("LOADED2..............")
-
-// content.js
 console.log("Content script loaded.");
 
 chrome.runtime.sendMessage({action: "checkAlive"}, function(response) {
